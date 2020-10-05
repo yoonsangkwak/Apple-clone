@@ -143,6 +143,9 @@
     }
 
     function playAnimation() {
+        // 임시
+        if (typeof sceneNumber == 'number') currentScene = sceneNumber;
+
         const objs = sceneInfo[currentScene].objs;
         const values = sceneInfo[currentScene].values;
         const currentYOffset = yOffset - prevScrollHeight;
@@ -271,6 +274,15 @@
     
     // DOMContentLoaded : HTML구조만 로드되면 바로 실행, 실행타이밍 빠름
     window.addEventListener('load', setLayout);
+
+    // 임시
+	window.addEventListener('load', () => {
+		setLayout();
+		for (let i = sceneInfo.length - 1; i >= 0; i--) {
+			playAnimation(i);
+		}
+    });
+    
     window.addEventListener('resize', setLayout);
 
 })();
