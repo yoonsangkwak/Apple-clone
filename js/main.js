@@ -24,6 +24,7 @@
             values: {
                 videoImageCount: 300,
                 imageSequence: [0, 299],
+                canvas_opacity: [1, 0, { start: 0.9, end: 1}],
                 messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
                 messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
                 messageC_opacity_in: [0, 1, { start: 0.5, end: 0.6 }],
@@ -129,6 +130,10 @@
             }
         }
         document.body.setAttribute('id', `show-scene-${currentScene}`);
+
+        const heightRatio = window.innerHeight / 1080;
+        sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+
     }
 
     function calcValues(values, currentYOffset) {
@@ -158,8 +163,8 @@
     }
 
     function playAnimation() {
-        // 임시
-        if (typeof sceneNumber == 'number') currentScene = sceneNumber;
+        // // 임시
+        // if (typeof sceneNumber == 'number') currentScene = sceneNumber;
 
         const objs = sceneInfo[currentScene].objs;
         const values = sceneInfo[currentScene].values;
@@ -171,7 +176,8 @@
             case 0:
                 let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
                 objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-                // console.log('0 play');
+                objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
+
                 if (scrollRatio <= 0.22) {
                     // in
                     objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
@@ -290,14 +296,12 @@
     });
     
     // DOMContentLoaded : HTML구조만 로드되면 바로 실행, 실행타이밍 빠름
-    window.addEventListener('load', setLayout);
+    // window.addEventListener('load', setLayout);
 
-    // 임시
+    // // 임시
 	window.addEventListener('load', () => {
 		setLayout();
-		for (let i = sceneInfo.length - 1; i >= 0; i--) {
-			playAnimation(i);
-		}
+		sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
     });
     
     window.addEventListener('resize', setLayout);
