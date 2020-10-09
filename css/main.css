@@ -70,6 +70,7 @@ a {
 }
 
 .scroll-section {
+    position: relative;
     padding-top: 50vh;
 }
 
@@ -201,7 +202,7 @@ a {
 }
 
 .image-blend-canvas {
-    background: blue;
+    /* background: blue; */
 }
 
 #scroll-section-3 {
