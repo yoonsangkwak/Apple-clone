@@ -147,6 +147,10 @@ body.before-load {
     opacity: 0;
 }
 
+.desc-message p {
+    width: 50%;
+}
+
 .pin {
     width: 1px;
     height: 100px;
