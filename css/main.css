@@ -211,6 +211,10 @@ body.before-load {
     will-change: transform, opacity;
 }
 
+.scroll-effect-end .sticky-elem {
+    display: none !important;
+}
+
 .sticky-elem-canvas {
     top: 0;
     height: 100%;
@@ -287,6 +291,10 @@ body.before-load {
 /* .loading-circle:hover circle {
     stroke-dashoffset: -157;
 } */
+
+.normal-content {
+    margin-bottom: 10rem;
+}
 
 @media (min-width: 1024px) {
     #scroll-section-0 h1 {
